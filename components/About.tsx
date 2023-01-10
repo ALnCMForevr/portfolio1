@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import AboutPic from "../images/aboutPic.jpg";
-import Image from 'next/image';
+import { PageInfo } from '../typings';
+import { urlFor } from '../sanity';
 
-type Props = {}
+type Props = { 
+  pageInfo: PageInfo
+}
 
-function About({}: Props) {
+function About({ pageInfo }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -31,7 +33,7 @@ function About({}: Props) {
         viewport={{
           once: true
         }}
-        src="images\aboutPic.jpg"
+        src={urlFor(pageInfo?.profilePic).url()}
         alt="Awesome picture of me"
         className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px]"
       />
@@ -40,18 +42,7 @@ function About({}: Props) {
         <h4 className="text-4xl font-semibold">
           Here is a <span className="underline decoration-[#F7AB0A]/50">little</span> background.
         </h4>
-        <p className="text-base">
-          Under the sky, while we lie here in the dark
-          You told me you dreamt, of a life where it’s you and me
-          Into our hearts, where we laid our deepest truths 
-          We raised our hands, made a pledge that we’d love for life
-          But nothing lasts forever
-          That’s the bitter truth
-          You led your lies far deeper
-          Than you could’ve prove 
-          Then you ran away, left me here in pain, and I don’t know what to say
-          So I’ll spill the truth, I admit it true, that I can’t get over you
-        </p>
+        <p className="text-base">{pageInfo?.backgroundInformation}</p>
       </div>
     </motion.div>
   )

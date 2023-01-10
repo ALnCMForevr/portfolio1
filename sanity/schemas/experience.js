@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineType} from 'sanity'
 
 export default defineType({
   name: 'experience',
@@ -40,6 +40,12 @@ export default defineType({
       title: "Technologies",
       type: "array",
       of: [{ type: "reference", to: { type: "skill" } }],
+    },
+    {
+      name: "points",
+      title: "Points",
+      type: "array",
+      of: [{ type: "string" }]
     }
   ],
 })

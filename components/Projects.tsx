@@ -1,10 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Project } from '../typings';
+import { urlFor } from '../sanity';
 
-type Props = {}
+type Props = {
+    projects: Project[]
+}
 
-function Projects({ }: Props) {
-    const projects = [1, 2, 3, 4, 5];
+function Projects({projects}: Props) {
   return (
       <motion.div
           initial={{ opacity: 0 }}
@@ -15,10 +18,14 @@ function Projects({ }: Props) {
               Projects
           </h3>
 
-          <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap mandatory z-20 scrollbar scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
-              {projects.map((project, i) => (
-                  <div className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
+          <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
+              {projects?.map((project, i) => (
+                  <div
+                    className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
+                    key={project._id}
+                  >
                       <motion.img
+                          className=""
                           initial={{
                               y: -300,
                               opacity: 0
@@ -26,7 +33,7 @@ function Projects({ }: Props) {
                           transition={{ duration: 1.2 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{once: true}}
-                          src=""
+                          src={urlFor(project?.image).url()}
                           alt="proj"
                       />
 
@@ -36,11 +43,23 @@ function Projects({ }: Props) {
                                 className="underline decoration-[#F7AB0A]/50"
                               >
                                   Case Study {i + 1} of {projects.length}:
-                              </span> Clone
+                              </span> 
+                              {project?.title}
                           </h4>
 
+                      <div className="flex items-center space-x-2 justify-center">
+                          {project?.technologies.map((technology) => (
+                              <img
+                                  className="h-10 w-10"
+                                  key={technology._id}
+                                  src={urlFor(technology.image).url()}
+                                  alt=""
+                              />
+                          ))}
+                      </div>        
+
                           <p className="text-lg text-center md:textleft">
-                              Under the sky, where lie here in the dark. You told me you dreamt of a life where it's you and me. Into our hearts, where we laid out deepest truths. 
+                              {project.summary}
                           </p>
                       </div>
                   </div>

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineType} from 'sanity'
 
 export default defineType({
   name: 'pageInfo',
@@ -12,7 +12,7 @@ export default defineType({
     },
     {
       name: "role",
-      title: "Male",
+      title: "Role",
       type: "string"
     },
     {
